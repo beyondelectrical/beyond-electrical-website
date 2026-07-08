@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inquire — Beyond Electrical Solutions</title>
+<meta name="description" content="Discuss your project with Beyond Electrical Solutions, a referral-only electrical contractor in Calgary, AB.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="container nav-row">
+    <a href="index.html" class="brand"><img src="assets/logo.png" alt="Beyond Electrical Solutions"></a>
+    <nav class="primary links" id="primaryNav">
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="specialties.html">Specialties</a>
+      <a href="standards.html">Standards</a>
+      <a href="inquire.html" class="active">Inquire</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Inquire</span>
+    <h1>Discuss Your Project</h1>
+    <p class="lede">Tell us a bit about the property and the work. We read every inquiry personally and typically follow up within two business days.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container" style="max-width: 820px;">
+    <form id="inquireForm" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="projectType">Project Type</label>
+          <select id="projectType" name="projectType" required>
+            <option value="" disabled selected>Select one</option>
+            <option>Custom Residential Wiring</option>
+            <option>Architectural &amp; Custom Lighting</option>
+            <option>Solar PV Systems</option>
+            <option>EV Charging</option>
+            <option>Panel &amp; Service Upgrades</option>
+            <option>Design-Build Commercial</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="timeline">Timeline <span class="opt">(optional)</span></label>
+          <select id="timeline" name="timeline">
+            <option value="" selected>Select one</option>
+            <option>As soon as possible</option>
+            <option>1&ndash;3 months</option>
+            <option>3&ndash;6 months</option>
+            <option>Just exploring options</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="location">Property Location <span class="opt">(neighbourhood or area)</span></label>
+          <input type="text" id="location" name="location" placeholder="e.g. Elbow Park, Calgary">
+        </div>
+        <div class="field full">
+          <label for="message">Tell us about the project</label>
+          <textarea id="message" name="message" required placeholder="Scope, property type, referral source, anything relevant."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary" style="margin-top:8px; border:none; cursor:pointer;">Send Inquiry</button>
+      <p class="form-note">Prefer email? Reach us directly at <a href="mailto:info@beyondelectrical.ca" class="link-ghost">info@beyondelectrical.ca</a>.</p>
+      <p class="form-status" id="formStatus"></p>
+    </form>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo.png" alt="Beyond Electrical Solutions">
+        <p>A boutique, referral&#8209;only electrical contractor based in Calgary, Alberta.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="specialties.html">Specialties</a>
+        <a href="standards.html">Standards</a>
+        <a href="inquire.html">Inquire</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@beyondelectrical.ca">info@beyondelectrical.ca</a>
+        <p>Calgary, Alberta</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Beyond Electrical Solutions Inc.</span>
+      <span>Licensed &amp; insured electrical contractor &mdash; Calgary, AB</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/inquire-form.js"></script>
+</body>
+</html>
