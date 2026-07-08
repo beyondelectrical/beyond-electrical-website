@@ -1,28 +1,13 @@
 /* ============================================================
    Inquiry form handler
    ------------------------------------------------------------
-   To make this form actually save submissions, connect it to
-   Supabase:
+   Submits to /api/inquire — a Vercel serverless function that
+   saves to Supabase and/or emails via Resend. No API keys live
+   in this file or anywhere else in the browser-visible code.
 
-   1. In your Supabase project, create a table called "inquiries"
-      with columns: id (uuid, auto), created_at (timestamptz, auto),
-      name (text), email (text), project_type (text),
-      timeline (text), location (text), message (text).
-
-   2. Add an RLS policy on that table that allows INSERT for the
-      "anon" role only (no SELECT/UPDATE/DELETE for anon) — this
-      keeps the public form safe to expose a public key for.
-
-   3. Fill in SUPABASE_URL and SUPABASE_ANON_KEY below with the
-      values from Project Settings > API in your Supabase dashboard.
-
-   Until those two values are filled in, the form will show a
-   friendly message directing people to email you directly instead
-   of failing silently.
+   See api/inquire.js for the environment variables that need to
+   be set in Vercel for this to actually save/send anything.
    ============================================================ */
-
-const SUPABASE_URL = ''; // e.g. 'https://xxxxx.supabase.co'
-const SUPABASE_ANON_KEY = ''; // the "anon" public key, not the service key
 
 const form = document.getElementById('inquireForm');
 const statusEl = document.getElementById('formStatus');
@@ -50,27 +35,14 @@ if (form) {
       return;
     }
 
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-      showStatus(
-        "This form isn't fully connected yet — please email info@beyondelectrical.ca directly for now and we'll get right back to you.",
-        'err'
-      );
-      return;
-    }
-
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/inquiries`, {
+      const res = await fetch('/api/inquire', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          Prefer: 'return=minimal',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
