@@ -260,18 +260,30 @@ nav.primary a:hover, nav.primary a.active{ color: var(--text); }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(20px, 2.4vw, 32px);
+  align-items: start;
 }
 @media (max-width: 900px){ .work-grid{ grid-template-columns: 1fr; } }
 
 .plate{
   position: relative;
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/2;
   background:
     linear-gradient(180deg, rgba(44,90,160,0.10), rgba(10,11,13,0) 60%),
     var(--bg-panel);
   border: 1px solid var(--hairline);
   overflow: hidden;
 }
+.plate.has-photo{ aspect-ratio: 3/2; }
+.plate.has-photo.portrait{ aspect-ratio: 2/3; }
+.plate img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.02);
+}
+.plate.has-photo::before{ display: none; }
 .plate::before{
   content:'';
   position:absolute; inset:0;
