@@ -1,0 +1,130 @@
+/* ============================================================
+   Intro animation — lightbulb-flicker logo reveal, character
+   pulls the cord, blackout, reveal homepage.
+   Scoped entirely to #introOverlay so it never touches the rest
+   of the site's styles.
+   ============================================================ */
+
+#introOverlay{
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.5s ease;
+}
+#introOverlay.fade-out{ opacity: 0; pointer-events: none; }
+#introOverlay.hidden{ display: none; }
+
+.intro-stage{
+  position: relative;
+  width: min(90vw, 520px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro-logo{
+  width: 220px;
+  opacity: 0;
+  filter: brightness(0.4);
+}
+.intro-logo.flicker-on{
+  animation: bulbFlickerOn 1.1s steps(1) forwards;
+}
+.intro-logo.flicker-off{
+  animation: bulbFlickerOff 0.4s steps(1) forwards;
+}
+
+@keyframes bulbFlickerOn{
+  0%   { opacity: 0;   filter: brightness(0.3); }
+  8%   { opacity: 1;   filter: brightness(1.3); }
+  11%  { opacity: 0.2; filter: brightness(0.3); }
+  16%  { opacity: 1;   filter: brightness(1.3); }
+  19%  { opacity: 0.3; filter: brightness(0.4); }
+  26%  { opacity: 1;   filter: brightness(1.3); }
+  29%  { opacity: 0.5; filter: brightness(0.6); }
+  36%  { opacity: 1;   filter: brightness(1.15); }
+  100% { opacity: 1;   filter: brightness(1); }
+}
+@keyframes bulbFlickerOff{
+  0%   { opacity: 1;   filter: brightness(1); }
+  20%  { opacity: 0.2; }
+  38%  { opacity: 1;   filter: brightness(1.4); }
+  55%  { opacity: 0.15;}
+  75%  { opacity: 0.7; }
+  100% { opacity: 0;   filter: brightness(0.2); }
+}
+
+/* Pull cord hanging from the logo */
+.intro-cord{
+  width: 1px;
+  height: 70px;
+  background: var(--hairline-strong, rgba(242,240,234,0.3));
+  margin-top: 2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.intro-cord.visible{ opacity: 1; }
+.intro-cord-handle{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--blue-bright, #5488d6);
+  margin: -1px auto 0;
+  transition: transform 0.35s cubic-bezier(.3,0,.2,1);
+}
+.intro-cord.pulled .intro-cord-handle{ transform: translateY(26px); }
+.intro-cord.pulled{ height: 96px; }
+
+/* Character: simple line-art figure that walks in and pulls */
+.intro-character{
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 46px;
+  height: 90px;
+  transform: translateX(-220px) translateX(-50%);
+  transition: transform 0.7s cubic-bezier(.25,.7,.3,1);
+  opacity: 0;
+}
+.intro-character.walk-in{
+  opacity: 1;
+  transform: translateX(28px) translateX(-50%);
+}
+.intro-character .arm{
+  transform-origin: 60% 20%;
+  transition: transform 0.35s ease;
+}
+.intro-character.reach .arm{
+  transform: rotate(38deg);
+}
+.intro-character.pull .arm{
+  transform: rotate(70deg) translateY(6px);
+}
+
+.intro-skip{
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(242,240,234,0.45);
+  background: none;
+  border: 1px solid rgba(242,240,234,0.2);
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.intro-skip:hover{ color: #f2f0ea; border-color: rgba(242,240,234,0.5); }
+
+body.intro-lock{ overflow: hidden; height: 100vh; }
+
+@media (prefers-reduced-motion: reduce){
+  #introOverlay{ display: none !important; }
+}
